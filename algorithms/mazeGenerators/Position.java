@@ -46,5 +46,8 @@ public class Position {
         return row == position.row && column == position.column;
     }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(row, column);
+    }
 }

@@ -2,16 +2,17 @@ package algorithms.search;
 
 public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
 
-    private String Name; //algorithm name
-    private int NumberOfNodesEvaluated; //number of visited states we pass through reaching the final solution
-    private Isearchable problem;  //the specific problem we want to solve.
-    //public abstract Solution solve(Isearchable domain);
+    protected String Name; //algorithm name
+    protected int NumberOfNodesEvaluated; //number of visited states we pass through reaching the final solution
+    protected Isearchable problem;  //the specific problem we want to solve.
+
 
     public ASearchingAlgorithm(Isearchable problem) {
 
         this.problem = problem;
     }
 
+    public abstract Solution solve(Isearchable domain);
 
     //SETTER AND GETTER
 

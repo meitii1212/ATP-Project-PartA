@@ -8,7 +8,7 @@ public abstract class AState {
     protected AState parent = null;
     protected double cost = 0 ; //cost of step initializes to zero.
     protected Object origin; //refers to the original origin object.
-    protected boolean isVisited = false ; //generally a state is not visited yet.
+    protected boolean IsVisited = false ; //generally a state is not visited yet.
 
     //not difaultive cconstructor
     public AState(Object origin1) {
@@ -21,6 +21,17 @@ public abstract class AState {
     public abstract boolean equals(Object o);
     public abstract int hashCode();
 
+
+    //COST COMPERATOR
+    public int CompareCost(AState s2){
+        if(this.getCost() > s2.getCost()){
+            return 1;
+        }
+        if(this.getCost() < s2.getCost()){
+            return -1;
+        }
+        return 0;
+    }
 
 
     //GETTERS AND SETTERS
@@ -48,11 +59,11 @@ public abstract class AState {
         origin = origin1;
     }
 
-    public boolean isVisited() {
-        return isVisited;
+    public boolean getIsVisited() {
+        return IsVisited;
     }
 
-    public void setVisited(boolean visited) {
-        isVisited = visited;
+    public void setIsVisited(boolean visited) {
+        IsVisited = visited;
     }
 }

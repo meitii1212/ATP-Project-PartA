@@ -7,8 +7,8 @@ public abstract class AState {
 
     protected AState parent = null;
     protected double cost = 0 ; //cost of step initializes to zero.
-    protected Object origin; //refers to the original origin object.
-    protected boolean IsVisited = false ; //generally a state is not visited yet.
+    protected Object origin; //refers to the original origin object.- dependency injection
+
 
     //not difaultive cconstructor
     public AState(Object origin1) {
@@ -59,11 +59,4 @@ public abstract class AState {
         origin = origin1;
     }
 
-    public boolean getIsVisited() {
-        return IsVisited;
-    }
-
-    public void setIsVisited(boolean visited) {
-        IsVisited = visited;
-    }
 }

@@ -34,6 +34,7 @@ public abstract class AState {
     }
 
 
+
     //GETTERS AND SETTERS
     public AState getParent() {
         return parent;

@@ -18,8 +18,10 @@ public class MazeState extends AState{
        return ((Position)this.getOrigin()).toString();
     }
     public boolean equals(Object o){
-        Position p = (Position) o;
-        return ((Position)(this.getOrigin())).equals(p);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MazeState p = (MazeState) o;
+        return ((Position)(this.getOrigin())).equals(p.getOrigin());
     }
     public int hashCode(){
        return ((Position)this.getOrigin()).hashCode();

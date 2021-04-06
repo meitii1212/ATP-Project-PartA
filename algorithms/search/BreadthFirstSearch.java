@@ -13,6 +13,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
     protected AbstractQueue<AState> queue; //queue of all the possible steps that available in the current isearchable.
 
     HashSet<AState> VisitedSet;
+
     //CONSTRUCTOR
     public BreadthFirstSearch() {
         super();
@@ -21,7 +22,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
         HashSet<AState> VisitedSet = new HashSet<>();// a hash set that keeps all the visited states
     }
 
-    public Solution solve(Isearchable domain){
+    public Solution solve(ISearchable domain){
         problem = domain;
         Solution final_solution = new Solution();
         AState start = problem.getStartState();
@@ -51,6 +52,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                     if(!(VisitedSet.contains(Neighbors.get(i)))){
                         //add the  neighbor to the visited set and update the queue
                         VisitedSet.add(Neighbors.get(i)) ;
+                        //NumberOfNodesEvaluated++
+                        this.AddsEvaluatedNode();
                         Neighbors.get(i).setParent(curr);
                         queue.offer(Neighbors.get(i));
                     }
@@ -58,8 +61,8 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
             }
         }
 
-        //if there is no solution to the path - not suppose to happen
-        return null;
+        //if there is no solution to the path - not suppose to happen return empty solution
+        return final_solution;
 
 
     }

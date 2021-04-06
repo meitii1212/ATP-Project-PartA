@@ -78,6 +78,7 @@ public class MyMazeGenerator extends AMazeGenerator {
         // finding the first zero in the correct row to set the end Position.
             for (int i = columns1 - 1; i >= 0; i--) {
                 if (map[rows1 - flag][i] == pass) {  //the relevent zero will be in the row that mtches to the flag.
+                    map[rows1-1][i]=pass;
                     end.setRowIndex(rows1 - 1);
                     end.setColumnIndex(i);// update the end position if col even
                     break;

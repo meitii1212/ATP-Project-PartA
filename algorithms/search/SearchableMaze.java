@@ -38,7 +38,7 @@ public class SearchableMaze implements ISearchable {
     //COORDINATES CHECKING FUNCTIONS
 
     private boolean isOnMap(int row1,int col1){
-        return (row1>-1 && row1< originMaze.getRows() && col1>-1 && col1<originMaze.getColumns());
+        return (row1>=0 && row1< originMaze.getRows() && col1>=0 && col1<originMaze.getColumns());
     }
     //searching zero on the right
     private boolean rightN(int row1,int col1){
@@ -51,12 +51,12 @@ public class SearchableMaze implements ISearchable {
 
     //searching zero on the up side
     private boolean upN(int row1,int col1){
-        return ( isOnMap(row1+1,col1)&&((this.originMaze.getMap()[row1+1][col1])==0) );
+        return ( isOnMap(row1-1,col1)&&((this.originMaze.getMap()[row1-1][col1])==0) );
     }
 
     //searching zero on the down side
     private boolean downN(int row1,int col1){
-        return ( isOnMap(row1-1,col1)&&((this.originMaze.getMap()[row1-1][col1])==0) );
+        return ( isOnMap(row1+1,col1)&&((this.originMaze.getMap()[row1+1][col1])==0) );
     }
 
     //searching zero on the up-right side

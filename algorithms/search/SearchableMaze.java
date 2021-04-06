@@ -6,12 +6,11 @@ import algorithms.mazeGenerators.Position;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
-public class SearchableMaze implements Isearchable {
+public class SearchableMaze implements ISearchable {
 
     //fields
     private AState StartState;
     private AState GoalState;
-    private Hashtable<AState,ArrayList<AState>> hash; //an hash table that keep all the succesorrs list per a AState
     private Maze originMaze;
 
 
@@ -22,47 +21,10 @@ public class SearchableMaze implements Isearchable {
         this.originMaze = origin;
         this.StartState =  new MazeState(origin.getStartPosition());
         this.GoalState = new MazeState(origin.getGoalPosition());
-        this.hash = initialHashTable(originMaze) ;
+
 
     }
 
-
-
-
-
-    /**
-     * @param my_maze the maze we whant to calculate the succesors for.
-     * @return a hashtables (with no Null values) with mapping of AStates ArryList per each specific AState.
-     */
-
-    private Hashtable<AState,ArrayList<AState>> initialHashTable(Maze my_maze){
-        Hashtable<AState,ArrayList<AState>> my_hash = new Hashtable<>();
-        int rows = originMaze.getRows();
-        int cols = originMaze.getColumns();
-
-        //searching zero neighbors for each zero coordinate in the maze and adding it into the hash table
-
-
-        ArrayList<AState> curr_list;
-
-        //adding the first state neighbors list to the hash table.
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-
-                if (originMaze.getMap()[i][j]==0){
-                    AState curr_state = new MazeState(new Position(i,j));
-                     curr_list = createlistN(i, j);
-                     my_hash.put(curr_state,curr_list);
-
-                }
-
-            }
-
-        }
-
-        return my_hash;
-
-    }
 
 
     /**
@@ -70,11 +32,10 @@ public class SearchableMaze implements Isearchable {
      * @return ArrayList<AState> neighbors or NULL if it doesnt have neighbors.
      */
     public ArrayList<AState> getAllSuccessors(AState my_state){
-
-        return hash.get(my_state);
+        return createlistN(((Position) my_state.getOrigin()).getRowIndex(), ((Position) my_state.getOrigin()).getColumnIndex());
     }
 
-    //COORDINATES CHEKING FUNCTIONS
+    //COORDINATES CHECKING FUNCTIONS
 
     private boolean isOnMap(int row1,int col1){
         return (row1>-1 && row1< originMaze.getRows() && col1>-1 && col1<originMaze.getColumns());
@@ -122,7 +83,7 @@ public class SearchableMaze implements Isearchable {
     /**
      * @param x the row index of a specific state
      * @param y the column index of a specific state
-     * @return //final list of neighbors to the hashtable
+     * @return //final list of neighbors
      */
     private ArrayList<AState> createlistN(int x, int y){
 
@@ -199,13 +160,6 @@ public class SearchableMaze implements Isearchable {
         GoalState = goalState;
     }
 
-    public Hashtable<AState, ArrayList<AState>> getHash() {
-        return hash;
-    }
-
-    public void setHash(Hashtable<AState, ArrayList<AState>> hash) {
-        this.hash = hash;
-    }
 
     public Maze getOriginMaze() {
         return originMaze;

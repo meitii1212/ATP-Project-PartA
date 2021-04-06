@@ -14,7 +14,7 @@ public class Solution {
      * @param my_goal  the final goal we reached to.
      * update the SolutionPath list the solution path AStates by order.
      */
-    public void setSolutionPath(AState my_goal) {
+    public void BuildSolutionPath(AState my_goal) {
             //if there is no solution to the maze
         if (my_goal==null){
             return;
@@ -25,6 +25,7 @@ public class Solution {
             upside_sol.add(curr);
             while (curr.getParent()!=null){
                 upside_sol.add(curr.getParent());
+                curr = curr.parent;
              }
 
             //turnning upside down the path solution to be from the start to the end.
@@ -37,6 +38,7 @@ public class Solution {
     }
 
     public ArrayList<AState> getSolutionPath() {
+
         return SolutionPath;
     }
     /**

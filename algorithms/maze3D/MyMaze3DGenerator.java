@@ -65,7 +65,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         if(depth1%2==0){
             flag=2;
         }
-        
+
         for (int i = row1-1; i >=0 ; i--) {
             if (map[depth1 - flag][i][i]==pass){
                 if(flag==2){

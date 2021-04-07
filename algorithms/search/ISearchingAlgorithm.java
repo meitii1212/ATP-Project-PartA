@@ -6,6 +6,7 @@ public interface ISearchingAlgorithm {
     Solution solve(ISearchable domain);
     String getName();
     int getNumberOfNodesEvaluated();
+    long measureAlgorithmTimeMillis(ISearchable problem1);
 
 
 }

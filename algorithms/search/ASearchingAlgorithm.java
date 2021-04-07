@@ -13,14 +13,21 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     public abstract Solution solve(ISearchable problem1);
 
 
+    //calculating solving time
+    public long measureAlgorithmTimeMillis (ISearchable problem1) {
+        long first_time = System.currentTimeMillis();
+        this.solve(problem1);
+        long last_time = System.currentTimeMillis();
+        return last_time - first_time;
+    }
     //SETTER AND GETTER
 
     @Override
-    public String getName() {
+    public String getName(){
         return Name;
     }
 
-    public void setName(String name) {
+    public void setName(String name){
         Name = name;
     }
 

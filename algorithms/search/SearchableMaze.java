@@ -50,33 +50,33 @@ public class SearchableMaze implements ISearchable {
     }
 
     //searching zero on the up side
-    private boolean upN(int row1,int col1){
+    private boolean strightN(int row1,int col1){
         return ( isOnMap(row1-1,col1)&&((this.originMaze.getMap()[row1-1][col1])==0) );
     }
 
     //searching zero on the down side
-    private boolean downN(int row1,int col1){
+    private boolean backN(int row1,int col1){
         return ( isOnMap(row1+1,col1)&&((this.originMaze.getMap()[row1+1][col1])==0) );
     }
 
     //searching zero on the up-right side
-    private boolean uprightN(int row1,int col1){
-        return ( (upN(row1,col1)&& rightN(row1-1,col1))|| (rightN(row1,col1)&&upN(row1,col1+1)) );
+    private boolean strightrightN(int row1,int col1){
+        return ( (strightN(row1,col1)&& rightN(row1-1,col1))|| (rightN(row1,col1)&&strightN(row1,col1+1)) );
     }
 
     //searching zero on the up-left side
-    private boolean upleftN(int row1, int col1){
-        return ((upN(row1,col1) && leftN(row1-1,col1))||(leftN(row1,col1) && upN(row1,col1-1)));
+    private boolean strightleftN(int row1, int col1){
+        return ((strightN(row1,col1) && leftN(row1-1,col1))||(leftN(row1,col1) && strightN(row1,col1-1)));
     }
 
     //searching zero on the down-left side
-    private boolean downleftN(int row1, int col1){
-        return ((downN(row1,col1) &&leftN(row1+1,col1) )||( leftN(row1,col1)&&downN(row1,col1-1) ));
+    private boolean backleftN(int row1, int col1){
+        return ((backN(row1,col1) &&leftN(row1+1,col1) )||( leftN(row1,col1)&&backN(row1,col1-1) ));
     }
 
     //searching zero on the down-right side
-    private boolean downrightN(int row1, int col1){
-        return ((downN(row1,col1) &&rightN(row1+1,col1) )||(rightN(row1,col1) &&downN(row1,col1+1) ));
+    private boolean backrightN(int row1, int col1){
+        return ((backN(row1,col1) &&rightN(row1+1,col1) )||(rightN(row1,col1) &&backN(row1,col1+1) ));
     }
 
 
@@ -102,31 +102,31 @@ public class SearchableMaze implements ISearchable {
             left.setCost(1);
             final_list.add(left);
         }
-        if (upN(x,y)){
+        if (strightN(x,y)){
             AState up = new MazeState(new Position(x-1,y));
             up.setCost(1);
             final_list.add(up);
         }
-        if (downN(x,y)){
+        if (backN(x,y)){
             AState down = new MazeState(new Position(x+1,y));
             down.setCost(1);
             final_list.add(down);
         }
 
-        if (downleftN(x,y)){
+        if (backleftN(x,y)){
             AState down = new MazeState(new Position(x+1,y-1));
             final_list.add(down);
         }
 
-        if (upleftN(x,y)){
+        if (strightleftN(x,y)){
             AState down = new MazeState(new Position(x-1,y-1));
             final_list.add(down);
         }
-        if (downrightN(x,y)){
+        if (backrightN(x,y)){
             AState down = new MazeState(new Position(x+1,y+1));
             final_list.add(down);
         }
-        if (uprightN(x,y)){
+        if (strightrightN(x,y)){
             AState down = new MazeState(new Position(x-1,y+1));
             final_list.add(down);
         }

@@ -20,6 +20,12 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
         long last_time = System.currentTimeMillis();
         return last_time - first_time;
     }
+
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
     //SETTER AND GETTER
 
     @Override

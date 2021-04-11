@@ -8,8 +8,8 @@ public class EmptyMazeGenerator extends AMazeGenerator{
      */
     @Override
 
-    public Maze generate(int rows, int columns) {
-
+    public Maze generate(int rows, int columns) throws Exception {
+        this.Check2Dimentions(rows,columns,2,2);
         int[][] zero_map = new int[rows][columns];
 
         Position start_pos = new Position(0,0);

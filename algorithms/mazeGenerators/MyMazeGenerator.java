@@ -14,8 +14,9 @@ public class MyMazeGenerator extends AMazeGenerator {
         START POSITION - always {0,0}
         GOAL POSSITION - always on the bottom of the map and the exact place is demands in the diamensions of the wanted maze.
      */
-    public Maze generate(int rows1, int columns1) {
+    public Maze generate(int rows1, int columns1) throws Exception {
 
+        this.Check2Dimentions(rows1,columns1,2,2);
         // parameters to represents wall and pass as int in the map.
         int wall = 1;
         int pass = 0;
@@ -62,11 +63,11 @@ public class MyMazeGenerator extends AMazeGenerator {
             }
         }
 
-        //indicator to know whether there are odd or even number of columns.
+        //indicator to know whether there are odd or even number of rows.
         //in the even case we want to avoid last row full of ones.
 
         //finding the correct case
-        int flag=1; // if the columns is odd
+        int flag=1; // if the rows number is odd
         Position end = new Position(0, 0);
         Position start = new Position(0, 0);
         if (rows1 % 2 == 0) {

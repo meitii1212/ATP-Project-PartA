@@ -8,8 +8,8 @@ public class SimpleMazeGenerator extends AMazeGenerator {
      * @return returns a maze with simple constans solution with more random solutions
      * the constant solution is to go from the start all the way down and then all the way right.
      */
-    public Maze generate(int rows, int columns) {
-
+    public Maze generate(int rows, int columns) throws Exception {
+        this.Check2Dimentions(rows,columns,2,2);
         int[][] my_map = new int[rows][columns];
 
         for (int i = 0; i <rows ; i++) {

@@ -49,4 +49,9 @@ public class Solution {
         SolutionPath.add(my_state);
     }
 
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
 }

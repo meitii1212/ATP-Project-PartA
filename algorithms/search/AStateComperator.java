@@ -18,5 +18,10 @@ public class AStateComperator implements Comparator<AState>{
         public boolean equals(Object obj) {
             return false;
         }
+        protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
 
 }

@@ -34,7 +34,6 @@ public abstract class AState {
     }
 
 
-
     //GETTERS AND SETTERS
     public AState getParent() {
         return parent;
@@ -58,6 +57,12 @@ public abstract class AState {
 
     public void setOrigin(Object origin1) {
         origin = origin1;
+    }
+
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
     }
 
 }

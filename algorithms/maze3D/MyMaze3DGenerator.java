@@ -3,8 +3,10 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Random;
 
-public class MyMaze3DGenerator extends AMaze3DGenerator{
-    public Maze3D generate(int depth1,int row1, int column1) {
+public class MyMaze3DGenerator extends AMaze3DGenerator {
+    public Maze3D generate(int depth1,int row1, int column1) throws Exception {
+
+        this.Check3Dimentions(0,2,2 ,depth1,row1,column1);
         // parameters to represents wall and pass as int in the map.
         int wall=1;
         int pass=0;
@@ -23,8 +25,8 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
         //right to {0,2} by breaking the wall in {0,1} we'll represent that as {0,1,0,2}  (wall+potential dest)
         //down to{2,0} by breaking wall {1,0 => {1,0,2,0}
 
-        final LinkedList<int[]> next_steps = new LinkedList<>();
-        final Random random = new Random();
+        LinkedList<int[]> next_steps = new LinkedList<>();
+        Random random = new Random();
         int z = 0;
         int x = 0;
         int y = 0;
@@ -32,7 +34,7 @@ public class MyMaze3DGenerator extends AMaze3DGenerator{
 
         //as along as we have potential next step to do:
         while (!next_steps.isEmpty()) {
-            final int[] f = next_steps.remove(random.nextInt(next_steps.size())); //we randomly choose oure next step
+            int[] f = next_steps.remove(random.nextInt(next_steps.size())); //we randomly choose oure next step
             //coordinations of current Position
 
             z = f[3];

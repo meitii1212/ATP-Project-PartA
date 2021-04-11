@@ -11,23 +11,29 @@ import algorithms.mazeGenerators.MyMazeGenerator;
 import algorithms.search.*;
 
 public class RunMaze3DGenerator {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         MyMaze3DGenerator gen = new MyMaze3DGenerator();
-        // long time1 = gen.measureAlgorithmTimeMillis(100, 100, 100);
-        Maze3D my_maze = gen.generate(100, 100, 100);
-        my_maze.print();
-        //System.out.println(time1);
+        long time1 = gen.measureAlgorithmTimeMillis(100, 100, 100);
+        System.out.println(time1);
+      //Maze3D my_maze = gen.generate(100, 100, 100);
+       // System.out.println(System.currentTimeMillis());
+       // my_maze.print();
+      //  System.out.println(time1);
 
-        SearchableMaze3D searchableMaze = new SearchableMaze3D(my_maze);
-        //searchableMaze.getOriginMaze().print();
-        solveProblem(searchableMaze, new BreadthFirstSearch());
-        solveProblem(searchableMaze, new DepthFirstSearch());
-        solveProblem(searchableMaze, new BestFirstSearch());
+//        SearchableMaze3D searchableMaze = new SearchableMaze3D(my_maze);
+//
+//
+//        //searchableMaze.getOriginMaze().print();
+//        solveProblem(searchableMaze, new BreadthFirstSearch());
+//        solveProblem(searchableMaze, new DepthFirstSearch());
+//        solveProblem(searchableMaze, new BestFirstSearch());
     }
 
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm
             searcher) {
-
+        System.out.println(System.currentTimeMillis());
+        System.out.println(searcher.measureAlgorithmTimeMillis(domain));
+        System.out.println(System.currentTimeMillis());
         //Solve a searching problem with a searcher
         Solution solution = searcher.solve(domain);
         System.out.println(String.format("'%s' algorithm - nodes evaluated: %s", searcher.getName(), searcher.getNumberOfNodesEvaluated()));

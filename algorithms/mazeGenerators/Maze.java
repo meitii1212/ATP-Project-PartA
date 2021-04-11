@@ -91,4 +91,9 @@ public class Maze {
     public void setGoalPosition(Position end) {
         this.end = end;
     }
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
 }

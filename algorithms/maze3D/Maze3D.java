@@ -9,17 +9,28 @@ public class Maze3D {
     private Position3D end;//goal position
 
 
-    public Maze3D(int[][][] map3D, Position3D start, Position3D end) {
+    public Maze3D(int[][][] map3D, Position3D start, Position3D end) throws Exception {
+        NullArgCheck(map3D);
+        NullArgCheck(start);
+        NullArgCheck(end);
         this.map = map3D;
         this.start = start;
         this.end = end;
+    }
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
     }
 
     public int getDepth() {
         return depth;
     }
 
-    public void setDepth(int depth) {
+    public void setDepth(int depth) throws Exception {
+        if(depth<0){
+            throw new Exception("Depth cannot be negative");
+        }
         this.depth = depth;
     }
 
@@ -27,7 +38,10 @@ public class Maze3D {
         return row;
     }
 
-    public void setRow(int row) {
+    public void setRow(int row) throws Exception {
+        if(row<2){
+            throw new Exception("Depth cannot be below 2 ");
+        }
         this.row = row;
     }
 

@@ -2,13 +2,13 @@ package algorithms.test;
 import algorithms.mazeGenerators.*;
 
 public class RunMazeGenerator {
-        public static void main(String[] args) {
+        public static void main(String[] args) throws Exception {
 
             testMazeGenerator(new EmptyMazeGenerator());
             testMazeGenerator(new SimpleMazeGenerator());
             testMazeGenerator(new MyMazeGenerator());
         }
-        private static void testMazeGenerator(IMazeGenerator mazeGenerator) {
+        private static void testMazeGenerator(IMazeGenerator mazeGenerator) throws Exception {
             // prints the time it takes the algorithm to run
             System.out.println(String.format("Maze generation time(ms): %s", mazeGenerator.measureAlgorithmTimeMillis(100/*rows*/,100/*columns*/)));
             // generate another maze

@@ -11,14 +11,15 @@ public class DepthFirstSearch extends ASearchingAlgorithm {
     private HashSet<AState> VisitedSet;
     private HashMap<AState,AState> FoundSuccessors; //all the successors we found throght the searching maaped to their parent
     /**CONSTRUCTOR*/
-    public DepthFirstSearch() {
+    public DepthFirstSearch() throws Exception {
         super();
         setName("DepthFirstSearch");
 
 
     }
 
-    public Solution solve(ISearchable domain){
+    public Solution solve(ISearchable domain) throws Exception {
+        NullArgCheck(domain);
         stack = new Stack<>(); //the stack that collect the possibloe next steps
         VisitedSet = new HashSet<>();// a hash set that keeps all the visited states
         FoundSuccessors = new HashMap<AState,AState>();

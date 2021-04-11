@@ -14,10 +14,10 @@ public class Solution {
      * @param my_goal  the final goal we reached to.
      * update the SolutionPath list the solution path AStates by order.
      */
-    public void BuildSolutionPath(AState my_goal) {
+    public void BuildSolutionPath(AState my_goal) throws Exception {
             //if there is no solution to the maze
         if (my_goal==null){
-            return;
+            throw new Exception("Maze with no solution");  //was return
         }
         //following the parents of the AState from the goal to the StartState
             ArrayList<AState> upside_sol = new ArrayList<AState>();
@@ -45,8 +45,9 @@ public class Solution {
      * @param my_state the new state we want to add to the final solution list
 
      */
-     public void AddToPath(AState my_state){
-        SolutionPath.add(my_state);
+     public void AddToPath(AState my_state) throws Exception {
+         NullArgCheck(my_state);
+         SolutionPath.add(my_state);
     }
 
     protected void NullArgCheck(Object my_obj) throws Exception{

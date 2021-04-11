@@ -11,17 +11,15 @@ public class AStateComperator implements Comparator<AState>{
      */
         @Override
         public int compare(AState o1, AState o2) {
+
             return o1.CompareCost(o2);
         }
 
-        @Override
-        public boolean equals(Object obj) {
-            return false;
-        }
-        protected void NullArgCheck(Object my_obj) throws Exception{
-        if (my_obj==null){
-            throw new Exception("Null argument received");
-        }
+//        @Override
+//        public boolean equals(Object obj) {
+//            return false;
+//        }
+
     }
 
-}
+

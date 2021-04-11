@@ -10,11 +10,12 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
     public ASearchingAlgorithm() {
     }
 
-    public abstract Solution solve(ISearchable problem1);
+    public abstract Solution solve(ISearchable problem1) throws Exception;
 
 
     //calculating solving time
-    public long measureAlgorithmTimeMillis (ISearchable problem1) {
+    public long measureAlgorithmTimeMillis (ISearchable problem1) throws Exception {
+        NullArgCheck(problem1);
         long first_time = System.currentTimeMillis();
         this.solve(problem1);
         long last_time = System.currentTimeMillis();
@@ -33,7 +34,8 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
         return Name;
     }
 
-    public void setName(String name){
+    public void setName(String name) throws Exception {
+        NullArgCheck(name);
         Name = name;
     }
 
@@ -51,7 +53,9 @@ public abstract class ASearchingAlgorithm implements ISearchingAlgorithm {
         return problem;
     }
 
-    public void setProblem(ISearchable problem) {
+    public void setProblem(ISearchable problem) throws Exception {
+
+        NullArgCheck(problem);
         this.problem = problem;
     }
 }

@@ -14,12 +14,13 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
 
 
     //CONSTRUCTOR
-    public BreadthFirstSearch() {
+    public BreadthFirstSearch() throws Exception {
         super();
         setName("BreadthFirstSearch");
     }
 
-    public Solution solve(ISearchable domain){
+    public Solution solve(ISearchable domain) throws Exception {
+        NullArgCheck(domain);
         problem = domain;
         AbstractQueue<AState> queue = new Queue();
         HashSet<AState> VisitedSet = new HashSet<>();// a hash set that keeps all the visited states

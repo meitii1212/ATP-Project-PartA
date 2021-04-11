@@ -8,7 +8,7 @@ public class Maze3DState extends AState {
 
     //inherit all the functions of the AState class with dependency injection of Position
     //CONSTRUCTOR
-    public Maze3DState(Position3D pos3d_arg) {
+    public Maze3DState(Position3D pos3d_arg) throws Exception {
         super(pos3d_arg);
         this.origin = (Position3D) this.origin;
     }

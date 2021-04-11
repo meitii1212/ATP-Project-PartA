@@ -20,7 +20,8 @@ public class SearchableMaze3D implements ISearchable {
     /**CONSTRUCTOR
      * @param origin the Maze we want to warp with the Adaptor pattern to get an Isearchable problem.
      */
-    public SearchableMaze3D(Maze3D origin) {
+    public SearchableMaze3D(Maze3D origin) throws Exception {
+        NullArgCheck(origin);
         this.originMaze = origin;
         this.StartState =  new Maze3DState(origin.getStartPosition());
         this.GoalState = new Maze3DState(origin.getGoalPosition());
@@ -34,7 +35,8 @@ public class SearchableMaze3D implements ISearchable {
      * @param my_state current state we want its neighbors list from the hash table
      * @return ArrayList<AState> neighbors or NULL if it doesnt have neighbors.
      */
-    public ArrayList<AState> getAllSuccessors(AState my_state){
+    public ArrayList<AState> getAllSuccessors(AState my_state) throws Exception {
+        NullArgCheck(my_state);
         return createlistN(((Position3D) my_state.getOrigin()).getDepthIndex(),((Position3D) my_state.getOrigin()).getRowIndex(), ((Position3D) my_state.getOrigin()).getColumnIndex());
     }
 
@@ -78,7 +80,7 @@ public class SearchableMaze3D implements ISearchable {
      * @param y the column index of a specific state
      * @return //final list of neighbors
      */
-    private ArrayList<AState> createlistN(int z, int x, int y){
+    private ArrayList<AState> createlistN(int z, int x, int y) throws Exception {
 
 
         ArrayList<AState> final_list = new ArrayList<>();
@@ -114,6 +116,11 @@ public class SearchableMaze3D implements ISearchable {
     }
 
 
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
 
     //GETTERS AND SETTERS
 
@@ -132,7 +139,8 @@ public class SearchableMaze3D implements ISearchable {
         return GoalState;
     }
 
-    public void setGoalState(AState goalState) {
+    public void setGoalState(AState goalState) throws Exception {
+        NullArgCheck(goalState);
         GoalState = goalState;
     }
 
@@ -140,7 +148,8 @@ public class SearchableMaze3D implements ISearchable {
         return originMaze;
     }
 
-    public void setOriginMaze(Maze3D originMaze) {
+    public void setOriginMaze(Maze3D originMaze) throws Exception {
+        NullArgCheck(originMaze);
         this.originMaze = originMaze;
     }
 }

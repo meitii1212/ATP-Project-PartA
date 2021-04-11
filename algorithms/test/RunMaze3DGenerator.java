@@ -30,7 +30,7 @@ public class RunMaze3DGenerator {
     }
 
     private static void solveProblem(ISearchable domain, ISearchingAlgorithm
-            searcher) {
+            searcher) throws Exception {
         System.out.println(System.currentTimeMillis());
         System.out.println(searcher.measureAlgorithmTimeMillis(domain));
         System.out.println(System.currentTimeMillis());

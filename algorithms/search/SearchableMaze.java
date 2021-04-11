@@ -17,7 +17,8 @@ public class SearchableMaze implements ISearchable {
     /**CONSTRUCTOR
      * @param origin the Maze we want to warp with the Adaptor pattern to get an Isearchable problem.
      */
-    public SearchableMaze(Maze origin) {
+    public SearchableMaze(Maze origin) throws Exception {
+        NullArgCheck(origin);
         this.originMaze = origin;
         this.StartState =  new MazeState(origin.getStartPosition());
         this.GoalState = new MazeState(origin.getGoalPosition());
@@ -31,7 +32,9 @@ public class SearchableMaze implements ISearchable {
      * @param my_state current state we want its neighbors list from the hash table
      * @return ArrayList<AState> neighbors or NULL if it doesnt have neighbors.
      */
-    public ArrayList<AState> getAllSuccessors(AState my_state){
+
+    public ArrayList<AState> getAllSuccessors(AState my_state) throws Exception {
+        NullArgCheck(my_state);
         return createlistN(((Position) my_state.getOrigin()).getRowIndex(), ((Position) my_state.getOrigin()).getColumnIndex());
     }
 
@@ -85,7 +88,7 @@ public class SearchableMaze implements ISearchable {
      * @param y the column index of a specific state
      * @return //final list of neighbors
      */
-    private ArrayList<AState> createlistN(int x, int y){
+    private ArrayList<AState> createlistN(int x, int y) throws Exception {
 
 
         ArrayList<AState> final_list = new ArrayList<>();
@@ -136,7 +139,11 @@ public class SearchableMaze implements ISearchable {
     }
 
 
-
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
 
 
     //GETTERS AND SETTERS:
@@ -156,7 +163,9 @@ public class SearchableMaze implements ISearchable {
         return GoalState;
     }
 
-    public void setGoalState(AState goalState) {
+    public void setGoalState(AState goalState) throws Exception {
+
+        NullArgCheck(goalState);
         GoalState = goalState;
     }
 
@@ -165,7 +174,9 @@ public class SearchableMaze implements ISearchable {
         return originMaze;
     }
 
-    public void setOriginMaze(Maze originMaze) {
+    public void setOriginMaze(Maze originMaze) throws Exception {
+
+        NullArgCheck(originMaze);
         this.originMaze = originMaze;
     }
 }

@@ -5,8 +5,8 @@ public class Maze3D {
     private int row;
     private int column;
     private int[][][] map;
-    private Position3D start;//start position
-    private Position3D end;//goal position
+    private Position3D startPosition;//start position
+    private Position3D goalPosition;//goal position
 
 
     public Maze3D(int[][][] map3D, Position3D start, Position3D end) throws Exception {
@@ -14,8 +14,8 @@ public class Maze3D {
         NullArgCheck(start);
         NullArgCheck(end);
         this.map = map3D;
-        this.start = start;
-        this.end = end;
+        this.startPosition = start;
+        this.goalPosition = end;
     }
     protected void NullArgCheck(Object my_obj) throws Exception{
         if (my_obj==null){
@@ -62,41 +62,44 @@ public class Maze3D {
     }
 
     public Position3D getStartPosition() {
-        return start;
+        return startPosition;
     }
 
     public void setStartPosition(Position3D start) {
-        this.start = start;
+        this.startPosition = start;
     }
 
     public Position3D getGoalPosition() {
-        return end;
+        return goalPosition;
     }
 
     public void setGoalPosition(Position3D end) {
-        this.end = end;
+        this.goalPosition = end;
     }
 
-    public void print(){
+    public void print() {
         System.out.println("{");
-        for (int i = 0; i < depth; i++) {
-            for (int j = 0; j <row ; j++) {
+        for (int depth = 0; depth < map.length; depth++) {
+            for (int row = 0; row < map[0].length; row++) {
                 System.out.print("{ ");
-                for (int k = 0; k < column; k++) {
-                    if(i==start.getDepthIndex()&&j== start.getRowIndex()&&k==start.getColumnIndex()){
+                for (int col = 0; col < map[0][0].length; col++) {
+                    if (depth == startPosition.getDepthIndex() && row == startPosition.getRowIndex() && col == startPosition.getColumnIndex()) // if the position is the start - mark with S
                         System.out.print("S ");
-                        continue;
+                    else {
+                        if (depth == goalPosition.getDepthIndex() && row == goalPosition.getRowIndex() && col == goalPosition.getColumnIndex()) // if the position is the goal - mark with E
+                            System.out.print("E ");
+                        else
+                            System.out.print(map[depth][row][col] + " ");
                     }
-                    if(i==end.getDepthIndex()&&j== end.getRowIndex()&&k==end.getColumnIndex()){
-                        System.out.print("E ");
-                        continue;
-                    }
-                    System.out.print(map[i][j][k]+" ");
                 }
                 System.out.println("}");
-
             }
-            System.out.println( "-".repeat(2*column+3));
+            if (depth < map.length - 1) {
+                System.out.print("---");
+                for (int i = 0; i < map[0][0].length; i++)
+                    System.out.print("--");
+                System.out.println();
+            }
         }
         System.out.println("}");
     }

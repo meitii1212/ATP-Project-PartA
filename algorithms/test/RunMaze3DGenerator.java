@@ -13,11 +13,11 @@ import algorithms.search.*;
 public class RunMaze3DGenerator {
     public static void main(String[] args) throws Exception {
         MyMaze3DGenerator gen = new MyMaze3DGenerator();
-        long time1 = gen.measureAlgorithmTimeMillis(100, 100, 100);
-        System.out.println(time1);
-      //Maze3D my_maze = gen.generate(100, 100, 100);
+        //long time1 = gen.measureAlgorithmTimeMillis(100, 100, 100);
+        //System.out.println(time1);
+        Maze3D my_maze = gen.generate(2, 2, 2);
        // System.out.println(System.currentTimeMillis());
-       // my_maze.print();
+        my_maze.print();
       //  System.out.println(time1);
 
 //        SearchableMaze3D searchableMaze = new SearchableMaze3D(my_maze);

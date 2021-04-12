@@ -6,7 +6,7 @@ import java.util.Random;
 public class MyMaze3DGenerator extends AMaze3DGenerator {
     public Maze3D generate(int depth1,int row1, int column1) throws Exception {
 
-        this.Check3Dimentions(0,2,2 ,depth1,row1,column1);
+        this.Check3Dimentions(depth1,row1,column1 ,2,2,2);
         // parameters to represents wall and pass as int in the map.
         int wall=1;
         int pass=0;

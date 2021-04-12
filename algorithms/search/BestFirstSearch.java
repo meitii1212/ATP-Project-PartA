@@ -9,7 +9,7 @@ import java.util.PriorityQueue;
  */
 public class BestFirstSearch extends BreadthFirstSearch{
 
-    public BestFirstSearch() {
+    public BestFirstSearch() throws Exception {
         super();
         setName("BestFirstSearch");
         AStateComperator my_comp = new AStateComperator(); //comparing by the cost of the AState

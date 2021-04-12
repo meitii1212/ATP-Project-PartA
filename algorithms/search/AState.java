@@ -11,7 +11,8 @@ public abstract class AState {
 
 
     //not difaultive cconstructor
-    public AState(Object origin1) {
+    public AState(Object origin1) throws Exception {
+        NullArgCheck(origin1);
         origin = origin1;
     }
 
@@ -24,6 +25,7 @@ public abstract class AState {
 
     //COST COMPERATOR
     public int CompareCost(AState s2){
+
         if(this.getCost() > s2.getCost()){
             return 1;
         }
@@ -39,7 +41,8 @@ public abstract class AState {
         return parent;
     }
 
-    public void setParent(AState parent) {
+    public void setParent(AState parent) throws Exception {
+        NullArgCheck(parent);
         this.parent = parent;
     }
 
@@ -47,7 +50,8 @@ public abstract class AState {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(double cost) throws Exception {
+        NullArgCheck(cost);
         this.cost = cost;
     }
 
@@ -55,7 +59,9 @@ public abstract class AState {
         return origin;
     }
 
-    public void setOrigin(Object origin1) {
+    public void setOrigin(Object origin1) throws Exception {
+
+        NullArgCheck(origin1);
         origin = origin1;
     }
 

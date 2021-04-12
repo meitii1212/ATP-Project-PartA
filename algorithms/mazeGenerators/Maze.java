@@ -14,8 +14,10 @@ public class Maze {
      * @param end1 - goal position of the maze
      * @param map1 - 2D array that represents the maze.
      */
-    public Maze(Position start1, Position end1, int[][] map1){
-
+    public Maze(Position start1, Position end1, int[][] map1) throws Exception {
+        NullArgCheck(start1);
+        NullArgCheck(end1);
+        NullArgCheck(map1);
         map=map1;
         start =start1;
         end=end1;
@@ -51,12 +53,21 @@ public class Maze {
     }
 
 
+    protected void NullArgCheck(Object my_obj) throws Exception{
+        if (my_obj==null){
+            throw new Exception("Null argument received");
+        }
+    }
+
     //GETTERS AND SETTERS
     public int getRows() {
         return rows;
     }
 
-    public void setRows(int rows) {
+    public void setRows(int rows) throws Exception {
+        if(rows <2){
+            throw new Exception("Number of rows must be above 1");
+        }
         this.rows = rows;
     }
 
@@ -64,7 +75,10 @@ public class Maze {
         return columns;
     }
 
-    public void setColumns(int columns) {
+    public void setColumns(int columns) throws Exception {
+        if(columns <2){
+            throw new Exception("Number of coulmns must be above 1");
+        }
         this.columns = columns;
     }
 
@@ -72,7 +86,9 @@ public class Maze {
         return map;
     }
 
-    public void setMap(int[][] map) {
+    public void setMap(int[][] map) throws Exception {
+
+        NullArgCheck(map);
         this.map = map;
     }
 
@@ -80,7 +96,8 @@ public class Maze {
         return start;
     }
 
-    public void setStartPosition(Position start) {
+    public void setStartPosition(Position start) throws Exception {
+        NullArgCheck(start);
         this.start = start;
     }
 
@@ -88,12 +105,10 @@ public class Maze {
         return end;
     }
 
-    public void setGoalPosition(Position end) {
+    public void setGoalPosition(Position end) throws Exception {
+        NullArgCheck(end);
         this.end = end;
     }
-    protected void NullArgCheck(Object my_obj) throws Exception{
-        if (my_obj==null){
-            throw new Exception("Null argument received");
-        }
-    }
+
+
 }

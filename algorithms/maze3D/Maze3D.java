@@ -40,7 +40,7 @@ public class Maze3D {
 
     public void setRow(int row) throws Exception {
         if(row<2){
-            throw new Exception("Depth cannot be below 2 ");
+            throw new Exception("Number of rows cannot be below 2 ");
         }
         this.row = row;
     }
@@ -49,7 +49,10 @@ public class Maze3D {
         return column;
     }
 
-    public void setColumn(int column) {
+    public void setColumn(int column) throws Exception {
+        if(column < 2){
+            throw new Exception("Number of columns cannot be below 2 ");
+        }
         this.column = column;
     }
 
@@ -57,7 +60,8 @@ public class Maze3D {
         return map;
     }
 
-    public void setMap(int[][][] map) {
+    public void setMap(int[][][] map) throws Exception {
+        NullArgCheck(map);
         this.map = map;
     }
 
@@ -65,7 +69,8 @@ public class Maze3D {
         return startPosition;
     }
 
-    public void setStartPosition(Position3D start) {
+    public void setStartPosition(Position3D start) throws Exception {
+        NullArgCheck(start);
         this.startPosition = start;
     }
 
@@ -73,7 +78,8 @@ public class Maze3D {
         return goalPosition;
     }
 
-    public void setGoalPosition(Position3D end) {
+    public void setGoalPosition(Position3D end) throws Exception {
+        NullArgCheck(end);
         this.goalPosition = end;
     }
 

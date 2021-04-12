@@ -50,9 +50,5 @@ public class Position {
     public int hashCode() {
         return Objects.hash(row, column);
     }
-    protected void NullArgCheck(Object my_obj) throws Exception{
-        if (my_obj==null){
-            throw new Exception("Null argument received");
-        }
-    }
+
 }

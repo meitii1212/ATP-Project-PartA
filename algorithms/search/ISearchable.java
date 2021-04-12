@@ -11,6 +11,6 @@ public interface ISearchable {
 
     AState getGoalState();
 
-    ArrayList<AState> getAllSuccessors(AState my_state);
+    ArrayList<AState> getAllSuccessors(AState my_state) throws Exception;
 
 }

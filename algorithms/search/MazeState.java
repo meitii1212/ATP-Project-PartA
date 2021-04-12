@@ -5,9 +5,9 @@ import algorithms.mazeGenerators.Position;
 public class MazeState extends AState{
 
     //inherit all the functions of the AState class with dependency injection of Position
-    public MazeState(Position pos_arg) {
+    public MazeState(Position pos_arg) throws Exception {
         super(pos_arg);
-        this.origin = (Position) this.origin; //casting the object to exact type???
+        this.origin = (Position) this.origin;
         
     }
 

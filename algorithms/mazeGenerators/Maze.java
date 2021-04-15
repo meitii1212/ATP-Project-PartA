@@ -77,7 +77,7 @@ public class Maze {
 
     public void setColumns(int columns) throws Exception {
         if(columns <2){
-            throw new Exception("Number of coulmns must be above 1");
+            throw new Exception("Number of columns must be above 1");
         }
         this.columns = columns;
     }

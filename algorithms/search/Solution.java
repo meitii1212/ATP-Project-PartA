@@ -15,10 +15,9 @@ public class Solution {
      * update the SolutionPath list the solution path AStates by order.
      */
     public void BuildSolutionPath(AState my_goal) throws Exception {
-            //if there is no solution to the maze
-        if (my_goal==null){
-            throw new Exception("Maze with no solution");  //was return
-        }
+        //null arg
+        NullArgCheck(my_goal);
+
         //following the parents of the AState from the goal to the StartState
             ArrayList<AState> upside_sol = new ArrayList<AState>();
             AState curr = my_goal;
@@ -37,8 +36,10 @@ public class Solution {
 
     }
 
-    public ArrayList<AState> getSolutionPath() {
-
+    public ArrayList<AState> getSolutionPath() throws Exception {
+        if (this.SolutionPath.size()==0){
+            throw new Exception("No solution to the maze");
+        }
         return SolutionPath;
     }
     /**

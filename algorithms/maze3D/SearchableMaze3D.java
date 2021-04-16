@@ -96,18 +96,18 @@ public class SearchableMaze3D implements ISearchable {
             final_list.add(left);
         }
         if (straitN(z ,x, y)){
-            AState up = new Maze3DState((new Position3D(z,x-1,y)));
-            final_list.add(up);
+            AState strait = new Maze3DState((new Position3D(z,x-1,y)));
+            final_list.add(strait);
         }
         if (backN(z, x, y)){
-            AState down = new Maze3DState(new Position3D(z,x+1,y));
-            final_list.add(down);
+            AState back = new Maze3DState(new Position3D(z,x+1,y));
+            final_list.add(back);
         }
         if (upN(z, x, y)){
-            AState down = new Maze3DState(new Position3D(z+1,x,y));
-            final_list.add(down);
+            AState up = new Maze3DState(new Position3D(z+1,x,y));
+            final_list.add(up);
         }
-        if (backN(z, x, y)){
+        if (downN(z, x, y)){
             AState down = new Maze3DState(new Position3D(z-1,x,y));
             final_list.add(down);
         }

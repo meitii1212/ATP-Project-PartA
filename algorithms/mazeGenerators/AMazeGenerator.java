@@ -25,6 +25,7 @@ public abstract class AMazeGenerator implements IMazeGenerator {
                 if (cols11 < limcol) {
                         throw new Exception("Column value is below required value");
                 }
+
         }
 
         protected void NullArgCheck(Object my_obj) throws Exception{

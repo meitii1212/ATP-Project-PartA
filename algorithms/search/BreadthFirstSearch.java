@@ -61,7 +61,7 @@ public class BreadthFirstSearch extends ASearchingAlgorithm {
                             //NumberOfNodesEvaluated++
                             this.AddsEvaluatedNode();
                         }
-                        //if its it the table, update the correct parent
+                        //if its it the table, update the correct neighbor to its original father
                         else{
                             Neighbors.get(i).setParent(FoundSuccessors.get(Neighbors.get(i)));
 

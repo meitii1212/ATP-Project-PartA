@@ -33,15 +33,15 @@ public class MyMazeGenerator extends AMazeGenerator {
         //right to {0,2} by breaking the wall in {0,1} we'll represent that as {0,1,0,2}  (wall+potential dest)
         //down to{2,0} by breaking wall {1,0 => {1,0,2,0}
 
-        final LinkedList<int[]> next_steps = new LinkedList<>();
-        final Random random = new Random();
+        LinkedList<int[]> next_steps = new LinkedList<>();
+        Random random = new Random();
         int x = 0;
         int y = 0;
         next_steps.add(new int[]{x, y, x, y}); //starting from {0,0} position
 
         //as along as we have potential next step to do:
         while (!next_steps.isEmpty()) {
-            final int[] f = next_steps.remove(random.nextInt(next_steps.size())); //we randomly choose oure next step
+             int[] f = next_steps.remove(random.nextInt(next_steps.size())); //we randomly choose oure next step
             //coordinations of current Position
 
             x = f[2];

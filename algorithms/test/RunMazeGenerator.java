@@ -7,6 +7,9 @@ public class RunMazeGenerator {
             testMazeGenerator(new EmptyMazeGenerator());
             testMazeGenerator(new SimpleMazeGenerator());
             testMazeGenerator(new MyMazeGenerator());
+
+            //EXCEPTIONS
+            testMazeGenerator(new MyMazeGenerator());
         }
         private static void testMazeGenerator(IMazeGenerator mazeGenerator) throws Exception {
             // prints the time it takes the algorithm to run
@@ -22,5 +25,8 @@ public class RunMazeGenerator {
             // prints the maze exit position
             System.out.println(String.format("Goal Position: %s", maze.getGoalPosition()));
         }
+
+
+
     }
 

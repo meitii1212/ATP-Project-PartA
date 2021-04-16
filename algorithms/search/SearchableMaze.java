@@ -95,43 +95,47 @@ public class SearchableMaze implements ISearchable {
 
         if (rightN(x,y)){
             AState right = new MazeState(new Position(x,y+1));
-            right.setCost(1);
+            right.setCost(10);
             final_list.add(right);
 
         }
 
         if (leftN(x,y)){
             AState left = new MazeState(new Position(x,y-1));
-            left.setCost(1);
+            left.setCost(10);
             final_list.add(left);
         }
         if (strightN(x,y)){
-            AState up = new MazeState(new Position(x-1,y));
-            up.setCost(1);
-            final_list.add(up);
+            AState stright = new MazeState(new Position(x-1,y));
+            stright.setCost(10);
+            final_list.add(stright);
         }
         if (backN(x,y)){
-            AState down = new MazeState(new Position(x+1,y));
-            down.setCost(1);
-            final_list.add(down);
+            AState back = new MazeState(new Position(x+1,y));
+            back.setCost(10);
+            final_list.add(back);
         }
 
         if (backleftN(x,y)){
-            AState down = new MazeState(new Position(x+1,y-1));
-            final_list.add(down);
+            AState backleft = new MazeState(new Position(x+1,y-1));
+            backleft.setCost(15);
+            final_list.add(backleft);
         }
 
         if (strightleftN(x,y)){
-            AState down = new MazeState(new Position(x-1,y-1));
-            final_list.add(down);
+            AState strightleft = new MazeState(new Position(x-1,y-1));
+            strightleft.setCost(15);
+            final_list.add(strightleft);
         }
         if (backrightN(x,y)){
-            AState down = new MazeState(new Position(x+1,y+1));
-            final_list.add(down);
+            AState backright = new MazeState(new Position(x+1,y+1));
+            backright.setCost(15);
+            final_list.add(backright);
         }
         if (strightrightN(x,y)){
-            AState down = new MazeState(new Position(x-1,y+1));
-            final_list.add(down);
+            AState strightright = new MazeState(new Position(x-1,y+1));
+            strightright.setCost(15);
+            final_list.add(strightright);
         }
 
 

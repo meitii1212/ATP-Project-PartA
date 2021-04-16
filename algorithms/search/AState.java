@@ -42,7 +42,6 @@ public abstract class AState {
     }
 
     public void setParent(AState parent) throws Exception {
-        NullArgCheck(parent);
         this.parent = parent;
     }
 

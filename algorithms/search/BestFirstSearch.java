@@ -14,7 +14,7 @@ public class BestFirstSearch extends BreadthFirstSearch{
         setName("BestFirstSearch");
         AStateComperator my_comp = new AStateComperator(); //comparing by the cost of the AState
         queue = new PriorityQueue<AState>(my_comp);
-
+        Flag = false;
     }
 
 

@@ -15,10 +15,6 @@ public class AStateComperator implements Comparator<AState>{
             return o1.CompareCost(o2);
         }
 
-//        @Override
-//        public boolean equals(Object obj) {
-//            return false;
-//        }
 
     }
 

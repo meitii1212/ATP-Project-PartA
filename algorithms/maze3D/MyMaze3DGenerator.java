@@ -21,16 +21,14 @@ public class MyMaze3DGenerator extends AMaze3DGenerator {
 
         // a linked list that keeping all the next possible steps that available for the current maze situation.
         // the available next steps are positions that +2 Possitions from the borders of the current maze burders
-        //that means that if we want to represent next step from {0,0} we can move only:
-        //right to {0,2} by breaking the wall in {0,1} we'll represent that as {0,1,0,2}  (wall+potential dest)
-        //down to{2,0} by breaking wall {1,0 => {1,0,2,0}
+
 
         LinkedList<int[]> next_steps = new LinkedList<>();
         Random random = new Random();
         int z = 0;
         int x = 0;
         int y = 0;
-        next_steps.add(new int[]{z, x, y, z, x, y}); //starting from {0,0} position
+        next_steps.add(new int[]{z, x, y, z, x, y}); //starting from {0,0,0} position
 
         //as along as we have potential next step to do:
         while (!next_steps.isEmpty()) {

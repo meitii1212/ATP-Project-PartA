@@ -116,6 +116,12 @@ public class Maze {
         this.end = end;
     }
 
+    /**
+     * c=counter that represents floor divition by 255
+     * note that the maze starts at index 12
+     * [c row , %rows , c cols, %cols, c startX, %startX, c startY, %startY, c endX, %endX, c endY, %endY,the maze bytes un compressed]
+     * @return byte[] that represents all the details of the Maze
+     */
     public byte[] toByteArray(){
 
     }

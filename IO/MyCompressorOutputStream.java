@@ -21,14 +21,22 @@ public class MyCompressorOutputStream extends OutputStream {
 
         // we assume that the array is starting with zero.
         int sum =0;
-        for (int i = 0; i < b_array.length ; i++) {
-
-            if(b_array[i]==0){
+        int i=0;
+        while (i < b_array.length) {
+            while (b_array[i] == 0) {
+                if()
                 sum++;
+                i++;
             }
-            else{
-
+            out.write(sum);
+            sum = 0;
+            while (b_array[i] == 1) {
+                sum++;
+                i++;
             }
+            out.write(sum);
+            sum = 0;
         }
+
     }
 }

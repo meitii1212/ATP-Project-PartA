@@ -1,4 +1,4 @@
-package algorithms.test;
+package test;
 import java.util.ArrayList;
 
 import algorithms.maze3D.IMaze3DGenerator;

@@ -24,11 +24,6 @@ public class Maze {
 
     }
 
-    public  Maze(byte[] my_info) throws Exception {
-        NullArgCheck(my_info);
-
-
-    }
 
     /**
      * this function prints the maze matrix
@@ -126,5 +121,31 @@ public class Maze {
 
     }
 
+
+    public Maze(byte[] arr) throws Exception {
+        NullArgCheck(arr);
+
+        //set the dimentions
+        this.setRows(arr[0]*255 + arr[1]);
+        this.setColumns(arr[2]*255 + arr[3]);
+
+        //set start and goal
+        Position my_start = new Position(arr[4]*255 + arr[5],arr[6]*255 + arr[7]);
+        Position my_end = new Position(arr[8]*255 + arr[9],arr[10]*255 + arr[11]);
+        this.setStartPosition(my_start);
+        this.setGoalPosition(my_end);
+
+        //recovering the map
+        int[][] my_map = new int[this.rows][this.columns];
+        int index=12;
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.columns; j++) {
+                my_map[i][j]=arr[index];
+                index++;
+            }
+        }
+        this.setMap(my_map);
+
+    }
 
 }

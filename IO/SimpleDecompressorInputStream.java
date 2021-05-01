@@ -13,6 +13,40 @@ public class SimpleDecompressorInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
+        return in.read();
+    }
+
+    @Override
+    public int read(byte[] b) throws IOException {
+        int  counter =in.read();
+        int index =0; //index in the out array
+
+        //as long as the input stream is not over
+        while(counter != -1 ){
+
+            //at first add zeroes according to the counter
+            while(counter != 0){
+                b[index] =0;
+                counter--;
+                index++;
+            }
+
+            //change the state
+
+            counter = in.read();
+            //checking the input is not over
+            if(counter ==-1 ){
+                break;
+            }
+            while(counter != 0){
+                b[index] =1;
+                counter--;
+                index++;
+            }
+            counter = in.read();
+
+        }
         return 0;
     }
+
 }

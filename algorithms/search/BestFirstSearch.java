@@ -17,8 +17,4 @@ public class BestFirstSearch extends BreadthFirstSearch{
         Flag = false;
     }
 
-
-
-
-
 }

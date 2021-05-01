@@ -24,6 +24,12 @@ public class Maze {
 
     }
 
+    public  Maze(byte[] my_info) throws Exception {
+        NullArgCheck(my_info);
+
+
+    }
+
     /**
      * this function prints the maze matrix
      * 0-PASS
@@ -108,6 +114,10 @@ public class Maze {
     public void setGoalPosition(Position end) throws Exception {
         NullArgCheck(end);
         this.end = end;
+    }
+
+    public byte[] toByteArray(){
+
     }
 
 

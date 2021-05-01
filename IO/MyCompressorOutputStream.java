@@ -23,14 +23,24 @@ public class MyCompressorOutputStream extends OutputStream {
         int sum =0;
         int i=0;
         while (i < b_array.length) {
+            //start to count the number of 0
             while (b_array[i] == 0) {
-                if()
+                //check if the number of 0 bigger than 254
+                if(sum>254){
+                    //if yes stop counting and count if there is more 0
+                    break;
+                }
                 sum++;
                 i++;
             }
             out.write(sum);
             sum = 0;
+            //next count the number of 1
             while (b_array[i] == 1) {
+                if(sum>254){
+                    //if yes stop counting and count if there is more 1
+                    break;
+                }
                 sum++;
                 i++;
             }

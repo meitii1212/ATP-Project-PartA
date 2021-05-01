@@ -118,9 +118,63 @@ public class Maze {
      * @return byte[] that represents all the details of the Maze
      */
     public byte[] toByteArray(){
+        // initialize byte array
+        byte[] my_byte_array = new byte[12+(rows*columns)];
+
+        // calculate the values of start position
+        int startRow = start.getRowIndex();
+        int startCol = start.getColumnIndex();
+
+        int count_256_row_start = startRow / 255;
+        int rest_row_start = startRow % 255;
+
+        int count_256_col_start = startCol / 255;
+        int rest_col_start = startCol % 255;
+
+        // calculate the values of end position
+        int endtRow = end.getRowIndex();
+        int endCol = end.getColumnIndex();
+
+        int count_256_row_end = endtRow / 255;
+        int rest_row_end = endtRow % 255;
+
+        int count_256_col_end = endCol / 255;
+        int rest_col_end = endCol % 255;
+
+        // calculate the values of the rows in the maze
+        int count_256_rows = rows / 255;
+        int rest_rows = rows % 255;
+
+        // calculate the values of the cols in the maze
+        int count_256_cols = columns / 255;
+        int rest_cols = columns % 255;
+
+        //insert the values into the array
+        my_byte_array[0] = (byte)count_256_rows;
+        my_byte_array[1] = (byte)rest_rows;
+        my_byte_array[2] = (byte)count_256_cols;
+        my_byte_array[3] = (byte)rest_cols;
+        my_byte_array[4] = (byte)count_256_row_start;
+        my_byte_array[5] = (byte)rest_row_start;
+        my_byte_array[6] = (byte)count_256_col_start;
+        my_byte_array[7] = (byte)rest_col_start;
+        my_byte_array[8] = (byte)count_256_row_end;
+        my_byte_array[9] = (byte)rest_row_end;
+        my_byte_array[10] = (byte)count_256_col_end;
+        my_byte_array[11] = (byte)rest_col_end;
+
+        //insert the maze values into the array
+        int array_index = 12;
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++) {
+                my_byte_array[array_index] = (byte)map[i][j];
+                array_index++;
+            }
 
     }
+        return  my_byte_array;
 
+    }
 
     public Maze(byte[] arr) throws Exception {
         NullArgCheck(arr);
@@ -146,6 +200,6 @@ public class Maze {
         }
         this.setMap(my_map);
 
-    }
+        }
 
 }

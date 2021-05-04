@@ -18,8 +18,12 @@ public class SimpleDecompressorInputStream extends InputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
+        //skipping the maze details
+        for(int i=0; i<12; i++){
+            b[i] = (byte)in.read();
+        }
         int  counter =in.read();
-        int index =0; //index in the out array
+        int index =12; //index in the out array
 
         //as long as the input stream is not over
         while(counter != -1 ){

@@ -1,7 +1,5 @@
 package algorithms.search;
 
-import java.util.Objects;
-
 public abstract class AState {
 
 

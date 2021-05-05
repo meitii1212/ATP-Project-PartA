@@ -4,7 +4,6 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class SearchableMaze implements ISearchable {
 

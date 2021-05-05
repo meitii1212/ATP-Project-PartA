@@ -1,6 +1,5 @@
 package algorithms.search;
 
-import java.util.Comparator;
 import java.util.PriorityQueue;
 
 /**

@@ -17,7 +17,6 @@ public class Server {
     private IServerStrategy strategy;
     private volatile boolean  stop;
     private ExecutorService threadPool; // Thread pool
-    //private final Logger LOG = LogManager.getLogger(); //Log4j2
 
 
     public Server(int port, int listeningIntervalMS, IServerStrategy strategy) throws IOException {
@@ -25,7 +24,6 @@ public class Server {
         this.listeningIntervalMS = listeningIntervalMS;
         this.strategy = strategy;
         this.stop = false;
-        //initial the singletone congifuration file class
 
         // initialize thread pool with amount of threads as the user define in the config file //fff
         this.threadPool = Executors.newFixedThreadPool(Integer.parseInt(Configurations.getProperty("threadPoolSize"))); //fff

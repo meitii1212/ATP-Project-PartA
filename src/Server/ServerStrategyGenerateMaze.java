@@ -4,7 +4,6 @@ import IO.SimpleCompressorOutputStream;
 import algorithms.mazeGenerators.*;
 
 import java.io.*;
-import java.nio.channels.Channels;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy{
 
@@ -38,6 +37,10 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
 
                     case "EmptyMazeGenerator":
                         my_gen = new EmptyMazeGenerator();
+                        break;
+
+                    default:
+                        my_gen = new MyMazeGenerator();
                         break;
 
                 }

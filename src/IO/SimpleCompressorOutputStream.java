@@ -8,6 +8,7 @@ public class SimpleCompressorOutputStream extends OutputStream {
     private OutputStream out;
 
     public SimpleCompressorOutputStream(OutputStream os) {
+
         out =os;
     }
 

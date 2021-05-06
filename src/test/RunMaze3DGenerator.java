@@ -3,6 +3,10 @@ import java.util.ArrayList;
 
 import algorithms.maze3D.Maze3D;
 import algorithms.maze3D.MyMaze3DGenerator;
+import algorithms.search.AState;
+import algorithms.search.ISearchable;
+import algorithms.search.ISearchingAlgorithm;
+import algorithms.search.Solution;
 
 public class RunMaze3DGenerator {
     public static void main(String[] args) throws Exception {

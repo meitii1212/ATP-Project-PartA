@@ -1,5 +1,7 @@
 package test;
 
+import algorithms.mazeGenerators.*;
+
 public class RunMazeGenerator {
     public static void main(String[] args) throws Exception {
         testMazeGenerator(new EmptyMazeGenerator());

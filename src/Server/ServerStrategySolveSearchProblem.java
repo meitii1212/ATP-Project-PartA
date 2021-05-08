@@ -4,20 +4,18 @@ import algorithms.mazeGenerators.Maze;
 import algorithms.search.*;
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Hashtable;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
-    //mapping maze to his solution file
-    private static Hashtable<byte[],String> my_hash = new Hashtable<byte[],String>();
-    private static int file_num = 0;
 
     @Override
     public void applyStrategy(InputStream inFromClient, OutputStream outToClient) throws IOException {
         //creating object streams
         ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
         ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
-        String tempDirectoryPath = System.getProperty("java.io.tmpdir");
+        String tempDirectoryPath = System.getProperty("java.io.tmpdir"); //creating the directory for the solutions
 
         try {
             //as long as client needs service
@@ -30,67 +28,60 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 String algo_type = Configurations.getProperty("mazeSearchingAlgorithm");
 
 
-                byte[] a={1};
-                byte[] b = {2};
-                byte[] c = {3};
-
-                ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
+                //ByteArrayOutputStream outputStream = new ByteArrayOutputStream( );
 
                 //MAZE solver - according to the configuration definition:
                 switch(algo_type){
                     case "BreadthFirstSearch":
-                        //the sighn of this algo is 1
-                        outputStream.write( a );
                         my_algorithm = new BreadthFirstSearch();
                         break;
 
                     case "BestFirstSearch":
-                        //the sighn of this algo is 2
-                        outputStream.write( b );
                         my_algorithm = new BestFirstSearch();
                         break;
 
                     case "DepthFirstSearch":
-                        //the sighn of this algo is 3
-                        outputStream.write( c );
                         my_algorithm = new DepthFirstSearch();
                         break;
 
                     default:
-                        //the sighn of this algo is 1
-                        outputStream.write(a);
                         my_algorithm = new BreadthFirstSearch();
                         break;
                 }
-                outputStream.write(byte_maze);
-                //concatenate the rest of the byte array information of the maze
-                byte[] final_array = outputStream.toByteArray( );
 
-                if(my_hash.containsKey(final_array)){
-                    String sol_path = my_hash.get(final_array);
-                    FileInputStream file_stream = new FileInputStream(sol_path);
+                //outputStream.write(byte_maze);
+
+                //path to solution if exsists
+                String my_path = tempDirectoryPath+"/"+ Arrays.toString(byte_maze)+".Solution";
+
+                //SOLUTION EXSISTS
+                if(new File(tempDirectoryPath,my_path).exists()){
+
+                    FileInputStream file_stream = new FileInputStream(my_path);
                     ObjectInputStream object_stream = new ObjectInputStream(file_stream);
                     Solution my_sol = (Solution)object_stream.readObject();
                     toClient.writeObject(my_sol);
                     System.out.println("exist solution sent to client");
                 }
+
+
+                //CREATE A NEW SOLUTION
                 else {
+
+                    //solving the maze using ISerarchableMaze and the required algorithm.
                     SearchableMaze my_searchableMaze = new SearchableMaze(maze_from_client);
                     Solution my_sol = my_algorithm.solve(my_searchableMaze);
-                    String my_path = tempDirectoryPath+"/"+file_num+".Solution";
-                    file_num_plus();
+
                     //create a new file
                     FileOutputStream file_out_stream = new FileOutputStream(my_path);
                     ObjectOutputStream objectOut = new ObjectOutputStream(file_out_stream);
                     objectOut.writeObject(my_sol);
                     objectOut.close();
 
-
-                    my_hash.put(final_array, my_path);
+                    //sending solution to client
                     toClient.writeObject(my_sol);
-                    System.out.println("new solution sent to client"+file_num);
+                    System.out.println("new solution sent to client");//TODO: delete prints
                 }
-
 
 
             }
@@ -98,8 +89,5 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             e.printStackTrace();
 
         }
-    }
-    private synchronized int file_num_plus(){
-       return file_num++;
     }
 }

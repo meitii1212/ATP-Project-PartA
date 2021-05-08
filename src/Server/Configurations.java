@@ -13,8 +13,14 @@ public class Configurations {
             output = new FileOutputStream("C:/Users/bonjo/Desktop/נושאים מתקדמים בתכנות/resources/config.properties");
             InputStream input = new FileInputStream("C:/Users/bonjo/Desktop/נושאים מתקדמים בתכנות/resources/config.properties");
             properties = new Properties();
+
+            // set key and value
+            properties.setProperty("threadPoolSize", "3");
+            properties.setProperty("mazeGeneratingAlgorithm", "MyMazeGenerator");
+            properties.setProperty("mazeSearchingAlgorithm", "BestFirstSearch");
+
             // save properties to project root folder
-            properties.store(output, null);
+            properties.store(output, "");
 
         }
         catch (IOException io) {

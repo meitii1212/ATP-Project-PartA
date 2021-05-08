@@ -5,11 +5,10 @@ import java.io.InputStream;
 
 
 public class MyDecompressorOutputStream extends InputStream {
-
     private InputStream in;
 
     //CONSTRUCTOR
-    public MyDecompressorOutputStream(InputStream in)  {
+    public MyDecompressorOutputStream(InputStream in) throws IOException {
         this.in = in;
     }
 
@@ -25,41 +24,59 @@ public class MyDecompressorOutputStream extends InputStream {
 
         for (int i = 0; i < 12; i++) {
             b[i] = (byte) in.read();
+
         }
+        int rest =  in.read(); // readed 12 but byte is empty in 12
+        int maze_length =  CalcDimentions(b);
 
-        //calculating dimentions
-
-        int modulu = in.read(); //index 12 just reading without writing
-        int curr_compressed = in.read(); //index 13 start reading the maze
-        int index = 13; //index in the out array
-        int maze_length = CalcDimentions(b);
-
-        //indexes we write in the final decompressed bytearray
-        int start_index = 12;
-        int end_index;
+        int curr_index =12;
+        int curr_compressed;
 
         //as long as the input stream is not over and we are in the compressed part
-        for (int i = 0; i < maze_length -modulu; i++) {
+        for (int i = 0; i < (maze_length-rest)/8; i++) {
+
+            curr_compressed = in.read(); //reading the next int
+
             if (curr_compressed != -1) {
-                TransToBinary(curr_compressed,b,start_index);
-                start_index = start_index+8;
-                curr_compressed= in.read();
+                TransToBinary(curr_compressed, b, curr_index);
+                curr_index = curr_index + 8;
             }
-        }
-        //finishing decompressing
-        if (curr_compressed == -1){
-            return 0;
+
+            // if we finished -not seppose to heppend
+            else{
+                //System.out.println("finished in the for loop");
+                return 0;
+            }
+
         }
 
-        b[start_index] = (byte) curr_compressed;
-        start_index++;
-        //writing the end of the byte[] that is uncompressed
-        for (int i = 0; i < modulu-1; i++) {
-            b[start_index] = (byte)in.read();
-            start_index++;
+
+        curr_compressed = in.read(); //reading the next int
+
+        while(curr_compressed != -1){
+            b[curr_index] = (byte) curr_compressed;
+            curr_index++;
+            curr_compressed = in.read();
         }
 
         return 0;
+
+    }
+    private int CalcDimentions(byte[] byte_arr){
+        int rows = (byte_arr[0]*255) + byte_arr[1];
+        int cols =(byte_arr[2]*255) + byte_arr[3];
+        int mulp = rows*cols;
+        return mulp;
+    }
+
+    private void PrintRest() throws IOException {
+
+        int curr_compressed1 = (int) in.read();
+        while (curr_compressed1 != -1) {
+            System.out.println(curr_compressed1);
+            curr_compressed1 = (int) in.read();
+
+        }
     }
 
     private void TransToBinary(int num, byte[] final_byte,int start_index){
@@ -76,19 +93,15 @@ public class MyDecompressorOutputStream extends InputStream {
 
             // we reached modulu = zero therefore well put zero
             else{
-                final_byte[start_index] = (byte)0;
+                if(start_index <final_byte.length){
+                    final_byte[start_index] = (byte)0;
+                }
             }
 
             start_index++;
         }
 
 
-    }
-
-    private int CalcDimentions(byte[] byte_arr){
-        int rows = byte_arr[0]*255 + byte_arr[1];
-        int cols =byte_arr[2]*255 + byte_arr[3];
-        return rows*cols;
     }
 
 }

@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-public class MyDecompressorOutputStream extends InputStream {
+public class MyDecompressorInputStream extends InputStream {
     private InputStream in;
 
     //CONSTRUCTOR
-    public MyDecompressorOutputStream(InputStream in) throws IOException {
+    public MyDecompressorInputStream(InputStream in) throws IOException {
         this.in = in;
     }
 

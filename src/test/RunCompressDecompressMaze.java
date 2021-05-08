@@ -2,7 +2,7 @@ package test;
 //import IO.MyCompressorOutputStream;
 //import IO.MyDecompressorInputStream;
 import IO.MyCompressorOutputStream;
-import IO.MyDecompressorOutputStream;
+import IO.MyDecompressorInputStream;
 import IO.SimpleCompressorOutputStream;
 import IO.SimpleDecompressorInputStream;
 import algorithms.mazeGenerators.AMazeGenerator;
@@ -43,7 +43,7 @@ public class RunCompressDecompressMaze {
 
         String mazeFileName1 = "savedMaze2.maze";
         AMazeGenerator mazeGenerator1 = new MyMazeGenerator();
-        Maze maze1 = mazeGenerator.generate(4, 4); //Generate new maze
+        Maze maze1 = mazeGenerator.generate(100, 100); //Generate new maze
         try {
             // save maze to a file
             OutputStream out1 = new MyCompressorOutputStream((new FileOutputStream(mazeFileName1)));
@@ -56,7 +56,7 @@ public class RunCompressDecompressMaze {
         byte savedMazeBytes1[] = new byte[0];
         try {
             //read maze from file
-            InputStream in1 = new MyDecompressorOutputStream(new FileInputStream(mazeFileName1));
+            InputStream in1 = new MyDecompressorInputStream(new FileInputStream(mazeFileName1));
             savedMazeBytes1 = new byte[maze1.toByteArray().length];
             in1.read(savedMazeBytes1);
             in1.close();
@@ -68,10 +68,10 @@ public class RunCompressDecompressMaze {
                 Arrays.equals(loadedMaze1.toByteArray(),maze1.toByteArray());
         System.out.println(String.format("Mazes equal: %s",areMazesEquals1));
 
-        System.out.println("ORIGINAL");
-        maze1.print();
-
-        System.out.println("DECOMPRESSED");
-        loadedMaze1.print();
+//        System.out.println("ORIGINAL");
+//        maze1.print();
+//
+//        System.out.println("DECOMPRESSED");
+//        loadedMaze1.print();
     }
 }

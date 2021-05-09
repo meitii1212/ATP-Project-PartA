@@ -1,8 +1,9 @@
 package algorithms.search;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Solution {
+public class Solution implements Serializable {
 
     private ArrayList<AState> SolutionPath; // a list that contains all the chain of AStates that are the solution by order.
 

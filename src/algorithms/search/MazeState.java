@@ -2,7 +2,9 @@ package algorithms.search;
 
 import algorithms.mazeGenerators.Position;
 
-public class MazeState extends AState{
+import java.io.Serializable;
+
+public class MazeState extends AState  {
 
     //inherit all the functions of the AState class with dependency injection of Position
     public MazeState(Position pos_arg) throws Exception {

@@ -1,6 +1,8 @@
 package algorithms.mazeGenerators;
 
-public abstract class AMazeGenerator implements IMazeGenerator {
+import java.io.Serializable;
+
+public abstract class AMazeGenerator implements IMazeGenerator, Serializable {
 
         public long measureAlgorithmTimeMillis (int rows, int columns) throws Exception {
         long first_time = System.currentTimeMillis();

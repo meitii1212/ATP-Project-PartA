@@ -18,11 +18,12 @@ public class Client {
     public void communicateWithServer(){
 
         //CREATING CONNECTION WITH SERVER
-        try(Socket serverSocket = new Socket(serverIP,serverPort)){
+        try{
+            Socket serverSocket = new Socket(serverIP,serverPort);
             System.out.println("connected to server - IP= "+serverIP+",Port="+serverPort);
 
             //APPLY STRATEGY from client-> to server
-            strategy.applyStrategy(serverSocket.getInputStream(),serverSocket.getOutputStream());
+            strategy.clientStrategy(serverSocket.getInputStream(),serverSocket.getOutputStream());
 
         }
         catch(IOException e){

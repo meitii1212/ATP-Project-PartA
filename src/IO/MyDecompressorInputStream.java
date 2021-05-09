@@ -53,11 +53,15 @@ public class MyDecompressorInputStream extends InputStream {
 
         curr_compressed = in.read(); //reading the next int
 
-        while(curr_compressed != -1){
-            b[curr_index] = (byte) curr_compressed;
-            curr_index++;
-            curr_compressed = in.read();
+        for (int i = 0; i < rest; i++) {
+
+            if (curr_compressed != -1) {
+                b[curr_index] = (byte) curr_compressed;
+                curr_index++;
+                curr_compressed = in.read();
+            }
         }
+
 
         return 0;
 

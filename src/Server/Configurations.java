@@ -10,8 +10,9 @@ public class Configurations {
     InputStream input;
     private Configurations(){
         try{
-            output = new FileOutputStream("C:/Users/bonjo/Desktop/נושאים מתקדמים בתכנות/resources/config.properties");
-            InputStream input = new FileInputStream("C:/Users/bonjo/Desktop/נושאים מתקדמים בתכנות/resources/config.properties");
+
+            output = new FileOutputStream("C:/Users/Win10/ATP-Project-PartA/resources/config.properties");
+            input = new FileInputStream("C:/Users/Win10/ATP-Project-PartA/resources/config.properties");
             properties = new Properties();
 
             // set key and value

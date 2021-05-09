@@ -28,7 +28,10 @@ public class Server {
         // initialize thread pool with amount of threads as the user define in the config file //fff
         this.threadPool = Executors.newFixedThreadPool(Integer.parseInt(Configurations.getProperty("threadPoolSize"))); //fff
     }
-    public void start(){
+    public void start(){new Thread(() -> {initServer();}).start();}
+
+
+        public void initServer(){
         try {
             //INITIAL SERVER
             ServerSocket serverSocket = new ServerSocket(port);
@@ -55,9 +58,9 @@ public class Server {
                     System.out.println("Socket timeout");
                 }
             }
-            serverSocket.close();
             //threadPool.shutdown(); // do not allow any new tasks into the thread pool (not doing anything to the current tasks and running threads)
             threadPool.shutdownNow(); // do not allow any new tasks into the thread pool, and also interrupts all running threads (do not terminate the threads, so if they do not handle interrupts properly, they could never stop...)
+            serverSocket.close();
         } catch (IOException e) {
             System.out.println("IOException");
         }
@@ -66,13 +69,15 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try {
             //APPLAYING STRATEGY that recived from server-> to client
-            strategy.applyStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
+            strategy.ServerStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
             System.out.println("Done handling client: " + clientSocket.toString());
 
             //the server close the connection with the client
             clientSocket.close();
         } catch (IOException e){
             System.out.println("IOException");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -6,7 +6,7 @@ import java.io.OutputStream;
 
 public interface IServerStrategy {
 
-    void applyStrategy(InputStream inFromClient, OutputStream outToClient) throws IOException;
+    void ServerStrategy(InputStream inFromClient, OutputStream outToClient) throws Exception;
 
 
 }

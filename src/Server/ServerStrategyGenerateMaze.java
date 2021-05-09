@@ -8,7 +8,7 @@ import java.io.*;
 public class ServerStrategyGenerateMaze implements IServerStrategy{
 
     @Override
-    public void applyStrategy(InputStream inFromClient, OutputStream outToClient) throws IOException {
+    public void ServerStrategy(InputStream inFromClient, OutputStream outToClient) throws IOException {
 
         //creating object streams
         ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
@@ -20,7 +20,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                 IMazeGenerator my_gen = null;
 
                 //reading the dimentions from client
-                byte[] byte_array_from_client= (byte[]) fromClient.readObject();
+                int[] int_array_from_client= (int[]) fromClient.readObject();
                 Thread.sleep(2000);
 
                 String generatorType = Configurations.getProperty("mazeGeneratingAlgorithm");
@@ -46,7 +46,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                 }
 
                 //MAZE CREATING:
-                Maze my_maze = my_gen.generate((int)byte_array_from_client[0],(int)byte_array_from_client[1]);
+                Maze my_maze = my_gen.generate(int_array_from_client[0],int_array_from_client[1]);
                 byte[] maze_array = my_maze.toByteArray();
                 //COMPRESSING
 

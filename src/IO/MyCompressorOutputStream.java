@@ -65,4 +65,7 @@ public class MyCompressorOutputStream extends OutputStream {
 
     }
 
+    public OutputStream getOut() {
+        return out;
+    }
 }

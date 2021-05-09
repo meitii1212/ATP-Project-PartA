@@ -206,16 +206,4 @@ public class Maze implements Serializable {
 
         }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Maze maze = (Maze) o;
-        return Arrays.equals(this.toByteArray(), maze.toByteArray());
-    }
-
-    @Override
-    public int hashCode() {
-        return Arrays.hashCode(this.toByteArray());
-    }
 }

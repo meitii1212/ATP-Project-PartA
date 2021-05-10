@@ -10,12 +10,17 @@ package Server;
         import java.util.Hashtable;
         import java.util.concurrent.ConcurrentHashMap;
         import java.util.concurrent.atomic.AtomicInteger;
+        import java.util.concurrent.locks.Lock;
+        import java.util.concurrent.locks.ReentrantLock;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
     //mapping maze to his solution file
     private static volatile ConcurrentHashMap<String,String> my_hash=new ConcurrentHashMap<>();
     private static volatile AtomicInteger file_num= new AtomicInteger();
+    private static Lock TableLock = new ReentrantLock();
+    private static Lock NumLock = new ReentrantLock();
+    private static Lock WriteLock = new ReentrantLock();
 
     @Override
     public void ServerStrategy(InputStream inFromClient, OutputStream outToClient) throws IOException, ClassNotFoundException {
@@ -25,6 +30,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         String tempDirectoryPath = System.getProperty("java.io.tmpdir");
         String hash_path = tempDirectoryPath + "/" +"MyHash.ConcurrentHashMap";
         String atomic_num_path = tempDirectoryPath + "/" +"MyFileNum.int";
+
+        TableLock.lock();
+        //loading an existing hash table if an old server was activated before
         if (new File(tempDirectoryPath, "MyHash.ConcurrentHashMap").exists()) {
             System.out.println(" i found the file of the table ");
             FileInputStream file_stream = new FileInputStream(hash_path);
@@ -33,9 +41,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             System.out.println("the file exist");
             object_stream.close();
             file_stream.close();
-            //System.out.println(my_hash.keySet()[0]);
-        }
 
+        }
+        //creating a new hash table and a file to save it there
         else{
             FileOutputStream file_out_stream1 = new FileOutputStream(hash_path);
             ObjectOutputStream objectOut1 = new ObjectOutputStream(file_out_stream1);
@@ -44,15 +52,20 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             objectOut1.close();
             file_out_stream1.close();
         }
+        TableLock.unlock();
+
+        NumLock.lock();
+        //loading the current file num if an old server was activated before
         if (new File(tempDirectoryPath, "MyFileNum.int").exists()) {
             FileInputStream stream_int = new FileInputStream(atomic_num_path);
             ObjectInputStream object_stream_int= new ObjectInputStream(stream_int);
-           // System.out.println((CuncurrentHash object_stream_int
             file_num.set((int)object_stream_int.readObject());
             System.out.println("the atomic integer exist");
             object_stream_int.close();
             stream_int.close();
         }
+
+        //init the atomic integer that represents the file number and create a file to save it there
         else{
             file_num.set(0);
             FileOutputStream file_out_stream_atomic = new FileOutputStream(atomic_num_path);
@@ -62,7 +75,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             objectOut_atomic.close();
             file_out_stream_atomic.close();
         }
-
+        NumLock.unlock();
         try {
             //as long as client needs service
             while (fromClient != null) {
@@ -102,6 +115,9 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                         break;
                 }
 
+
+                WriteLock.lock();
+                //READING FROM HASH TABLE
                 if(my_hash.containsKey(comp_str)){
                     String sol_path = my_hash.get(comp_str);
                     FileInputStream file_stream = new FileInputStream(sol_path);
@@ -111,9 +127,12 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                     System.out.println("exist solution sent to client");
                     object_stream.close();
                     file_stream.close();
+
+                    WriteLock.unlock();
                     return;
                 }
                 else {
+                    //WRITING NEW SOLUTION
                     //solve the maze
                     SearchableMaze my_searchableMaze = new SearchableMaze(maze_from_client);
                     Solution my_sol = my_algorithm.solve(my_searchableMaze);
@@ -156,6 +175,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                     //write to client output stream the solution
                     toClient.writeObject(my_sol);
                     System.out.println("new solution sent to client "+file_num.get());
+                    WriteLock.unlock();
                 }
 
 

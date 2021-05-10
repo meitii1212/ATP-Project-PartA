@@ -92,7 +92,7 @@ public class RunCommunicateWithServers
                         //Maze maze = mg.generate(50, 50);
                         Position start1 = new Position(0,0);
                         Position end1 = new Position(2,2);
-                        int[][] map1= {{0,1,1},{0,1,0},{0,0,0}};
+                        int[][] map1= {{0,0,0},{1,1,0},{1,1,0}};
                         Maze maze = new Maze(start1,end1,map1);
                         maze.setColumns(3);
                         maze.setRows(3);

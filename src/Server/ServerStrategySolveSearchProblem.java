@@ -1,10 +1,9 @@
 package Server;
 
-        import IO.MyCompressorOutputStream;
-        import IO.MyDecompressorInputStream;
-        import algorithms.mazeGenerators.Maze;
-        import algorithms.search.*;
+        import IO.*;
 
+        import algorithms.mazeGenerators.*;
+        import algorithms.search.*;
         import java.io.*;
         import java.util.Arrays;
         import java.util.HashMap;
@@ -32,6 +31,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             ObjectInputStream object_stream = new ObjectInputStream(file_stream);
             my_hash=(ConcurrentHashMap<String,String>)object_stream.readObject();
             System.out.println("the file exist");
+            object_stream.close();
+            file_stream.close();
             //System.out.println(my_hash.keySet()[0]);
         }
 
@@ -40,12 +41,17 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             ObjectOutputStream objectOut1 = new ObjectOutputStream(file_out_stream1);
             objectOut1.writeObject(my_hash);
             System.out.println("creating hash file");
+            objectOut1.close();
+            file_out_stream1.close();
         }
         if (new File(tempDirectoryPath, "MyFileNum.int").exists()) {
             FileInputStream stream_int = new FileInputStream(atomic_num_path);
             ObjectInputStream object_stream_int= new ObjectInputStream(stream_int);
+           // System.out.println((CuncurrentHash object_stream_int
             file_num.set((int)object_stream_int.readObject());
             System.out.println("the atomic integer exist");
+            object_stream_int.close();
+            stream_int.close();
         }
         else{
             file_num.set(0);
@@ -53,6 +59,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             ObjectOutputStream objectOut_atomic = new ObjectOutputStream(file_out_stream_atomic);
             objectOut_atomic.writeObject(file_num.get());
             System.out.println("creating atomic num file");
+            objectOut_atomic.close();
+            file_out_stream_atomic.close();
         }
 
         try {
@@ -101,33 +109,39 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                     Solution my_sol = (Solution)object_stream.readObject();
                     toClient.writeObject(my_sol);
                     System.out.println("exist solution sent to client");
+                    object_stream.close();
+                    file_stream.close();
                     return;
                 }
                 else {
                     //solve the maze
                     SearchableMaze my_searchableMaze = new SearchableMaze(maze_from_client);
                     Solution my_sol = my_algorithm.solve(my_searchableMaze);
-
-                    String my_path = tempDirectoryPath+"/"+file_num.get()+".Solution";
+                    //creating the path for the new solution
+                    String my_sol_path = tempDirectoryPath+"/"+file_num.get()+".Solution";
                     file_num.incrementAndGet();
 
                     //update in the Atomic integer file
-                    PrintWriter pw_atomic_num = new PrintWriter("MyHash.HashMap");
+                    PrintWriter pw_atomic_num = new PrintWriter("MyFileNum.int");
                     pw_atomic_num.close();
-                    //insert to the file the update hashtable
+
+                    //insert to the file the update int value of atomic int
                     FileOutputStream file_out_stream_atomic_int = new FileOutputStream(atomic_num_path);
                     ObjectOutputStream objectOut1_atomic_int = new ObjectOutputStream(file_out_stream_atomic_int);
-                    objectOut1_atomic_int.writeObject(my_hash);
+                    objectOut1_atomic_int.writeObject(file_num.get());
+                    objectOut1_atomic_int.close();
+                    file_out_stream_atomic_int.close();
 
 
-                    //create a new file
-                    FileOutputStream file_out_stream = new FileOutputStream(my_path);
+                    //create a new solution file
+                    FileOutputStream file_out_stream = new FileOutputStream(my_sol_path);
                     ObjectOutputStream objectOut = new ObjectOutputStream(file_out_stream);
                     objectOut.writeObject(my_sol);
                     objectOut.close();
+                    file_out_stream.close();
 
-
-                    my_hash.put(comp_str, my_path);
+                    //updating the hash table file in directory
+                    my_hash.put(comp_str, my_sol_path);
                     //delete the content of the hashtable's file
                     PrintWriter pw = new PrintWriter("MyHash.HashMap");
                     pw.close();
@@ -136,6 +150,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                     FileOutputStream file_out_stream1 = new FileOutputStream(hash_path);
                     ObjectOutputStream objectOut1 = new ObjectOutputStream(file_out_stream1);
                     objectOut1.writeObject(my_hash);
+                    objectOut1.close();
+                    file_out_stream1.close();
 
                     //write to client output stream the solution
                     toClient.writeObject(my_sol);

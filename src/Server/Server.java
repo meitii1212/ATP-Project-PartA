@@ -69,6 +69,7 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try {
             //APPLAYING STRATEGY that recived from server-> to client
+            System.out.println("start handling client: " + clientSocket.toString());
             strategy.ServerStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
             System.out.println("Done handling client: " + clientSocket.toString());
 

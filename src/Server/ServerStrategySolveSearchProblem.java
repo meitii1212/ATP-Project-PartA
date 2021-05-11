@@ -78,7 +78,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         NumLock.unlock();
         try {
             //as long as client needs service
-            while (fromClient != null) {
+            //while (fromClient != null)
+            {
                 ASearchingAlgorithm my_algorithm = null;
                 Maze maze_from_client= (Maze) fromClient.readObject();
                 OutputStream out1 = new ByteArrayOutputStream();
@@ -181,6 +182,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
 
             }
+            fromClient.close();
+            toClient.close();
         } catch (Exception e) {
             e.printStackTrace();
 

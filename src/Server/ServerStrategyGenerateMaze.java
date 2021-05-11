@@ -16,17 +16,17 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
 
         try {
             //as long as client needs service
-            while (fromClient != null) {
+            //while (fromClient != null) {
                 IMazeGenerator my_gen = null;
 
                 //reading the dimentions from client
-                int[] int_array_from_client= (int[]) fromClient.readObject();
+                int[] int_array_from_client = (int[]) fromClient.readObject();
                 Thread.sleep(2000);
 
                 String generatorType = Configurations.getProperty("mazeGeneratingAlgorithm");
 
                 //MAZE GENERATING - according to the configuration definition:
-                switch(generatorType){
+                switch (generatorType) {
                     case "MyMazeGenerator":
                         my_gen = new MyMazeGenerator();
                         break;
@@ -46,7 +46,7 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                 }
 
                 //MAZE CREATING:
-                Maze my_maze = my_gen.generate(int_array_from_client[0],int_array_from_client[1]);
+                Maze my_maze = my_gen.generate(int_array_from_client[0], int_array_from_client[1]);
                 byte[] maze_array = my_maze.toByteArray();
                 //COMPRESSING
 
@@ -56,8 +56,15 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                 compress.write(maze_array);
                 compress.flush();
                 toClient.writeObject(byteArrayOutputStream.toByteArray());
-                System.out.println("maze bytearray sent to client");
-            }
+                System.out.println("maze byte array sent to client");
+                compress.close();
+                byteArrayOutputStream.close();
+
+//                fromClient.close();
+//                toClient.close();
+                System.out.println("end of generate strategy");
+
+
         } catch (IOException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {

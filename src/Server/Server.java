@@ -36,12 +36,12 @@ public class Server {
             //INITIAL SERVER
             ServerSocket serverSocket = new ServerSocket(port);
             serverSocket.setSoTimeout(listeningIntervalMS);
-            System.out.println("Starting server at port = " + port);
+            //System.out.println("Starting server at port = " + port);
 
             while (!stop) {
                 try {
                     Socket clientSocket = serverSocket.accept(); //accepting the wainting client
-                    System.out.println("Client accepted: " + clientSocket.toString());
+                    //System.out.println("Client accepted: " + clientSocket.toString());
 
                     // Insert the new task into the thread pool:
                     threadPool.submit(() -> {
@@ -69,9 +69,9 @@ public class Server {
     private void handleClient(Socket clientSocket) {
         try {
             //APPLAYING STRATEGY that recived from server-> to client
-            System.out.println("start handling client: " + clientSocket.toString());
+            //System.out.println("start handling client: " + clientSocket.toString());
             strategy.ServerStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
-            System.out.println("Done handling client: " + clientSocket.toString());
+            //System.out.println("Done handling client: " + clientSocket.toString());
 
             //the server close the connection with the client
             clientSocket.close();
@@ -83,7 +83,7 @@ public class Server {
     }
 
     public void stop(){
-        System.out.println("Stopping server...");
+        //System.out.println("Stopping server...");
         stop = true;
     }
 }

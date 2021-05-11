@@ -20,7 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Main {
+public class MainTester {
 
     private static final String resultsFilePath = "results.txt";
     private static final String logFilePath = "results.log";
@@ -271,7 +271,7 @@ public class Main {
 //import java.util.concurrent.TimeUnit;
 //import java.util.concurrent.atomic.AtomicInteger;
 //
-//public class Main {
+//public class MainTester {
 //
 //    private static final String resultsFilePath = "results.txt";
 //    private static final String logFilePath = "results.log";

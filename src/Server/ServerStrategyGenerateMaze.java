@@ -56,13 +56,13 @@ public class ServerStrategyGenerateMaze implements IServerStrategy{
                 compress.write(maze_array);
                 compress.flush();
                 toClient.writeObject(byteArrayOutputStream.toByteArray());
-                System.out.println("maze byte array sent to client");
+                //System.out.println("maze byte array sent to client");
                 compress.close();
                 byteArrayOutputStream.close();
 
 //                fromClient.close();
 //                toClient.close();
-                System.out.println("end of generate strategy");
+                //System.out.println("end of generate strategy");
 
 
         } catch (IOException e) {

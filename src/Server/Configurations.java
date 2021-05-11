@@ -11,8 +11,8 @@ public class Configurations {
     private Configurations(){
         try{
 
-            output = new FileOutputStream("resources/config.properties");
-            input = new FileInputStream("resources/config.properties");
+            output = new FileOutputStream("resources\\config.properties");
+            input = new FileInputStream("resources\\config.properties");
             properties = new Properties();
 
             // set key and value

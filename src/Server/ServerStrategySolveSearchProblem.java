@@ -34,11 +34,11 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
         TableLock.lock();
         //loading an existing hash table if an old server was activated before
         if (new File(tempDirectoryPath, "MyHash.ConcurrentHashMap").exists()) {
-            System.out.println(" i found the file of the table ");
+            //System.out.println(" i found the file of the table ");
             FileInputStream file_stream = new FileInputStream(hash_path);
             ObjectInputStream object_stream = new ObjectInputStream(file_stream);
             my_hash=(ConcurrentHashMap<String,String>)object_stream.readObject();
-            System.out.println("the file exist");
+            //System.out.println("the file exist");
             object_stream.close();
             file_stream.close();
 
@@ -48,7 +48,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             FileOutputStream file_out_stream1 = new FileOutputStream(hash_path);
             ObjectOutputStream objectOut1 = new ObjectOutputStream(file_out_stream1);
             objectOut1.writeObject(my_hash);
-            System.out.println("creating hash file");
+            //System.out.println("creating hash file");
             objectOut1.close();
             file_out_stream1.close();
         }
@@ -60,7 +60,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             FileInputStream stream_int = new FileInputStream(atomic_num_path);
             ObjectInputStream object_stream_int= new ObjectInputStream(stream_int);
             file_num.set((int)object_stream_int.readObject());
-            System.out.println("the atomic integer exist");
+            //System.out.println("the atomic integer exist");
             object_stream_int.close();
             stream_int.close();
         }
@@ -71,7 +71,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             FileOutputStream file_out_stream_atomic = new FileOutputStream(atomic_num_path);
             ObjectOutputStream objectOut_atomic = new ObjectOutputStream(file_out_stream_atomic);
             objectOut_atomic.writeObject(file_num.get());
-            System.out.println("creating atomic num file");
+            //System.out.println("creating atomic num file");
             objectOut_atomic.close();
             file_out_stream_atomic.close();
         }
@@ -125,7 +125,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                     ObjectInputStream object_stream = new ObjectInputStream(file_stream);
                     Solution my_sol = (Solution)object_stream.readObject();
                     toClient.writeObject(my_sol);
-                    System.out.println("exist solution sent to client");
+                    //System.out.println("exist solution sent to client");
                     object_stream.close();
                     file_stream.close();
 
@@ -175,7 +175,7 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
 
                     //write to client output stream the solution
                     toClient.writeObject(my_sol);
-                    System.out.println("new solution sent to client "+file_num.get());
+                    //System.out.println("new solution sent to client "+file_num.get());
                     WriteLock.unlock();
                 }
 
